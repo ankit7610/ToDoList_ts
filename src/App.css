@@ -49,6 +49,10 @@
 .app-header {
   margin-bottom: 32px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 }
 
 .app-header h1 {

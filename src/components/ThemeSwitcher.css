@@ -1,0 +1,65 @@
+.theme-switcher {
+  display: flex;
+  gap: 8px;
+  padding: 6px;
+  background: var(--bg-lighter);
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  align-items: center;
+}
+
+.theme-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-medium);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-button:hover:not(.active) {
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.theme-button.active {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.theme-button svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2;
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+  .theme-switcher {
+    gap: 4px;
+    padding: 4px;
+  }
+
+  .theme-button {
+    width: 32px;
+    height: 32px;
+  }
+
+  .theme-button svg {
+    width: 18px;
+    height: 18px;
+  }
+}
