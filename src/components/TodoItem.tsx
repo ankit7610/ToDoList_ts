@@ -10,7 +10,7 @@ interface TodoItemProps {
 
 const TodoItem: React.FC<TodoItemProps> = ({ todo, onToggle, onDelete }) => {
   return (
-    <li className="todo-item" role="listitem">
+    <li className="todo-item">
       <input
         aria-label={`Mark ${todo.title} as ${todo.completed ? 'incomplete' : 'complete'}`}
         type="checkbox"
