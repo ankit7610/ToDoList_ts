@@ -3,7 +3,13 @@ import { test, expect } from '@playwright/test';
 test.describe('Todo App - Core Tests', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
-    await page.evaluate(() => localStorage.clear());
+    await page.evaluate(async () => {
+      localStorage.clear();
+      const databases = await window.indexedDB.databases();
+      databases.forEach(db => {
+        if (db.name) window.indexedDB.deleteDatabase(db.name);
+      });
+    });
     await page.reload();
   });
 
