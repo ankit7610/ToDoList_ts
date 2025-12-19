@@ -6,21 +6,28 @@ import { getTodosFromDB, saveTodosToDB } from './utils/db';
 import './App.css';
 
 const App: React.FC = () => {
-  const [todos, setTodos] = useState<Todo[]>(() => {
-    const savedTodos = localStorage.getItem('todos');
-    if (savedTodos) {
+  const [todos, setTodos] = useState<Todo[]>([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // Load todos from IndexedDB on mount
+  useEffect(() => {
+    const loadTodos = async () => {
       try {
-        return JSON.parse(savedTodos).map((todo: any) => ({
-          ...todo,
-          createdAt: new Date(todo.createdAt),
-        }));
+        const savedTodos = await getTodosFromDB();
+        if (savedTodos && savedTodos.length > 0) {
+          setTodos(savedTodos.map(todo => ({
+            ...todo,
+            createdAt: new Date(todo.createdAt)
+          })));
+        }
       } catch (error) {
-        console.error('Failed to parse todos from localStorage:', error);
-        return [];
+        console.error('Failed to load todos from IndexedDB:', error);
+      } finally {
+        setIsLoaded(true);
       }
-    }
-    return [];
-  });
+    };
+    loadTodos();
+  }, []);
 
   // Save todos to IndexedDB whenever they change, but only after initial load
   useEffect(() => {
