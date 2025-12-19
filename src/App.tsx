@@ -5,23 +5,21 @@ import TodoList from './components/TodoList';
 import './App.css';
 
 const App: React.FC = () => {
-  const [todos, setTodos] = useState<Todo[]>([]);
-
-  // Load todos from localStorage on mount
-  useEffect(() => {
+  const [todos, setTodos] = useState<Todo[]>(() => {
     const savedTodos = localStorage.getItem('todos');
     if (savedTodos) {
       try {
-        const parsedTodos = JSON.parse(savedTodos).map((todo: any) => ({
+        return JSON.parse(savedTodos).map((todo: any) => ({
           ...todo,
           createdAt: new Date(todo.createdAt),
         }));
-        setTodos(parsedTodos);
       } catch (error) {
         console.error('Failed to parse todos from localStorage:', error);
+        return [];
       }
     }
-  }, []);
+    return [];
+  });
 
   // Save todos to localStorage whenever they change
   useEffect(() => {
