@@ -4,18 +4,25 @@
   box-sizing: border-box;
 }
 
+:root {
+  --bg-1: #f5f7ff;
+  --accent-1: #667eea;
+  --accent-2: #764ba2;
+  --card: #ffffff;
+  --muted: #8a8f98;
+  --danger: #ff6b6b;
+}
+
 body {
-  font-family: 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: Inter, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(180deg, var(--bg-1) 0%, #eef2ff 100%);
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 20px;
+  align-items: flex-start;
+  padding: 36px 20px;
 }
 
 code {

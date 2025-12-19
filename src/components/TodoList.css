@@ -6,11 +6,19 @@
 }
 
 .empty-state {
-  text-align: center;
-  padding: 40px 20px;
-  color: #999;
-  font-size: 18px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 8px;
-  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 18px;
+  text-align: left;
+  padding: 26px;
+  color: var(--muted);
+  font-size: 15px;
+  background: linear-gradient(180deg, #fff, #fcfdff);
+  border-radius: 12px;
+  border: 1px solid rgba(30,40,80,0.03);
 }
+
+.empty-state svg { flex-shrink: 0; }
+.empty-state .empty-text h3 { margin: 0 0 6px 0; color: #182033; font-size: 16px; }
+.empty-state .empty-text p { margin: 0; }

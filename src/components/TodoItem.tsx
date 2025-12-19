@@ -12,18 +12,23 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, onToggle, onDelete }) => {
   return (
     <li className="todo-item">
       <input
+        aria-label={`Mark ${todo.title} as ${todo.completed ? 'incomplete' : 'complete'}`}
         type="checkbox"
         checked={todo.completed}
         onChange={() => onToggle(todo.id)}
         className="todo-checkbox"
       />
-      <span className={`todo-title ${todo.completed ? 'completed' : ''}`}>
-        {todo.title}
-      </span>
+      <div style={{flex: 1}}>
+        <span className={`todo-title ${todo.completed ? 'completed' : ''}`}>
+          {todo.title}
+        </span>
+        <span className="timestamp">{new Date(todo.createdAt).toLocaleString()}</span>
+      </div>
       <button
         className="delete-btn"
         onClick={() => onDelete(todo.id)}
         title="Delete todo"
+        aria-label={`Delete ${todo.title}`}
       >
         ✕
       </button>
