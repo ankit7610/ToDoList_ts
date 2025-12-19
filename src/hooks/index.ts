@@ -19,3 +19,6 @@ export { useTodoPriority, TodoPriority, getPriorityColor, getPriorityLabel } fro
 export type { TodoPriority as TodoPriorityType } from './useTodoPriority';
 export { useTodoDueDates } from './useTodoDueDates';
 export type { TodoDueDate } from './useTodoDueDates';
+export { useLocalStorage, useSessionStorage } from './useStorage';
+export { useBulkTodoOperations } from './useBulkOperations';
+export type { BulkOperationResult } from './useBulkOperations';
