@@ -2,9 +2,9 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ main, playwright, caching ]
+    branches: [ main, playwright, caching, ui-improvements ]
   pull_request:
-    branches: [ main, playwright, caching ]
+    branches: [ main, playwright, caching, ui-improvements ]
 
 jobs:
   test:
