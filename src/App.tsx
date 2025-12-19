@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Todo } from './types';
 import TodoInput from './components/TodoInput';
 import TodoList from './components/TodoList';
+import ThemeSwitcher from './components/ThemeSwitcher';
 import { getTodosFromDB, saveTodosToDB } from './utils/db';
+import { useTheme } from './hooks/useTheme';
 import './App.css';
 
 const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  useTheme('system'); // Initialize theme hook
 
   // Load todos from IndexedDB on mount
   useEffect(() => {
@@ -68,6 +71,7 @@ const App: React.FC = () => {
       <div className="container">
         <header className="app-header">
           <h1>My Todo App</h1>
+          <ThemeSwitcher />
           {totalCount > 0 && (
             <p className="stats">
               {completedCount} of {totalCount} completed
