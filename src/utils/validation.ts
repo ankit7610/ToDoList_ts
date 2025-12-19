@@ -7,7 +7,12 @@ export class TodoValidationError extends Error {
   }
 }
 
-export const TodoValidator = {
+export const TodoValidator: {
+  validateTitle: (title: string) => void;
+  validateTodo: (todo: unknown) => asserts todo is Todo;
+  validateTodos: (todos: unknown) => asserts todos is Todo[];
+  sanitizeTitle: (title: string) => string;
+} = {
   validateTitle: (title: string): void => {
     if (typeof title !== 'string') {
       throw new TodoValidationError('Title must be a string');
