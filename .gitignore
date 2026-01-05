@@ -16,3 +16,7 @@ yarn-error.log*
 *.swp
 *.swo
 *~
+
+# Test reports
+playwright-report/
+test-results/
