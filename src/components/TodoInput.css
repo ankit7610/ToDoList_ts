@@ -1,26 +1,23 @@
 .todo-input-form {
   display: flex;
-  gap: 12px;
-  margin-bottom: 28px;
+  gap: 16px;
+  margin-bottom: 32px;
   align-items: stretch;
 }
 
 .todo-input {
   flex: 1;
-  padding: 18px 24px;
+  padding: 20px 28px;
   font-size: 16px;
-  border: 1px solid var(--border-medium);
-  border-radius: 20px;
+  border: none;
+  border-radius: 24px;
   outline: none;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  background: rgba(255, 255, 255, 0.5);
+  background: var(--card);
   color: var(--text-dark);
   font-weight: 500;
-  box-shadow: var(--shadow-sm);
-}
-
-[data-theme='dark'] .todo-input {
-  background: rgba(0, 0, 0, 0.2);
+  box-shadow: var(--neu-shadow-inset);
+  position: relative;
 }
 
 .todo-input::placeholder {
@@ -29,75 +26,115 @@
 }
 
 .todo-input:hover {
-  border-color: var(--border-medium);
-  background: var(--card);
+  box-shadow:
+    var(--neu-shadow-inset),
+    inset 0 0 20px rgba(0, 240, 255, 0.05);
 }
 
 .todo-input:focus {
-  border-color: var(--primary);
-  background: var(--card);
   box-shadow:
-    0 0 0 4px rgba(99, 102, 241, 0.08),
-    var(--shadow-lg);
+    var(--neu-shadow-inset),
+    inset 0 0 30px rgba(0, 240, 255, 0.1),
+    0 0 0 3px rgba(0, 240, 255, 0.3);
   transform: translateY(-2px);
 }
 
 .add-btn {
-  padding: 16px 40px;
+  padding: 20px 44px;
   font-size: 14px;
   font-weight: 800;
   border: none;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  background: linear-gradient(135deg, var(--neon-purple) 0%, var(--neon-cyan) 100%);
   color: white;
-  border-radius: 20px;
+  border-radius: 24px;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow:
-    0 12px 24px rgba(99, 102, 241, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    var(--neu-shadow-md),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 0 30px rgba(0, 240, 255, 0.4);
   white-space: nowrap;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   position: relative;
   overflow: hidden;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+/* Ripple effect on click */
 .add-btn::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
 }
 
-.add-btn:hover::before {
-  left: 100%;
+.add-btn:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Animated shine effect */
+.add-btn::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.3) 50%,
+      transparent 70%);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
 }
 
 .add-btn:hover {
-  transform: translateY(-4px) scale(1.03);
+  transform: translateY(-4px) scale(1.05);
   box-shadow:
-    0 20px 40px rgba(99, 102, 241, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    var(--neu-shadow-lg),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 0 40px rgba(0, 240, 255, 0.6),
+    0 0 60px rgba(181, 55, 242, 0.4);
 }
 
 .add-btn:active {
-  transform: translateY(-1px) scale(0.98);
+  transform: translateY(-2px) scale(1.02);
   box-shadow:
-    0 5px 15px rgba(99, 102, 241, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    var(--neu-shadow-sm),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 0 20px rgba(0, 240, 255, 0.5);
 }
 
 @media (max-width: 640px) {
   .todo-input-form {
-    gap: 10px;
-    margin-bottom: 24px;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .todo-input {
+    padding: 16px 20px;
+    font-size: 15px;
   }
 
   .add-btn {
-    padding: 12px 24px;
+    padding: 16px 28px;
+    font-size: 12px;
   }
 }
