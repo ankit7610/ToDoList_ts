@@ -17,8 +17,8 @@
     "e2e:ui": "playwright test --ui",
     "e2e:debug": "playwright test --debug",
     "e2e:report": "playwright show-report",
-    "server": "cd server && npm run dev",
-    "server:start": "cd server && npm start",
+    "server": "cd server && PORT=5001 npm run dev",
+    "server:start": "cd server && PORT=5001 npm start",
     "api:install": "cd server && npm install",
     "dev": "concurrently \"npm start\" \"npm run server\"",
     "setup": "npm install && npm run api:install"
@@ -44,6 +44,7 @@
     "@playwright/test": "^1.57.0",
     "@types/node": "^18.11.18",
     "@types/react": "^18.0.26",
-    "@types/react-dom": "^18.0.10"
+    "@types/react-dom": "^18.0.10",
+    "concurrently": "^9.2.1"
   }
 }
