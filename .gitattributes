@@ -1,0 +1,11 @@
+# Exclude generated HTML files from language statistics
+public/index.html linguist-vendored
+playwright-report/** linguist-generated
+test-results/** linguist-generated
+
+# Mark CSS as documentation to reduce its weight
+*.css linguist-documentation=false
+
+# Ensure TypeScript is properly detected
+*.ts linguist-detectable=true
+*.tsx linguist-detectable=true
