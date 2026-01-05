@@ -1,72 +1,140 @@
 .theme-switcher {
   display: flex;
-  gap: 8px;
-  padding: 8px;
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(8px);
+  gap: 10px;
+  padding: 10px;
+  background: var(--card);
   border-radius: 100px;
-  border: 1px solid var(--border-medium);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--neu-shadow-md);
   align-items: center;
+  position: relative;
 }
 
-[data-theme='dark'] .theme-switcher {
-  background: rgba(0, 0, 0, 0.2);
+/* Neon ring on active */
+.theme-switcher::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 100px;
+  padding: 2px;
+  background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-purple) 100%);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.theme-switcher:hover::before {
+  opacity: 0.6;
 }
 
 .theme-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   padding: 0;
   border: none;
-  border-radius: 8px;
-  background: transparent;
+  border-radius: 50%;
+  background: var(--card);
   color: var(--text-medium);
   cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 14px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  font-size: 16px;
   font-weight: 500;
   position: relative;
   overflow: hidden;
+  box-shadow: var(--neu-shadow-sm);
 }
 
 .theme-button:hover:not(.active) {
-  background: rgba(99, 102, 241, 0.08);
-  color: var(--primary);
-  transform: translateY(-2px);
+  background: var(--card);
+  color: var(--neon-cyan);
+  transform: translateY(-3px) scale(1.1);
+  box-shadow:
+    var(--neu-shadow-md),
+    0 0 20px rgba(0, 240, 255, 0.3);
 }
 
 .theme-button.active {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  background: linear-gradient(135deg, var(--neon-purple) 0%, var(--neon-cyan) 100%);
   color: white;
   box-shadow:
-    0 8px 16px rgba(99, 102, 241, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    var(--neu-shadow-md),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 0 25px rgba(0, 240, 255, 0.5);
+  transform: scale(1.05);
+}
+
+/* Pulsing effect on active */
+.theme-button.active::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: inherit;
+  opacity: 0.5;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
 }
 
 .theme-button svg {
-  width: 20px;
-  height: 20px;
-  stroke-width: 2;
+  width: 22px;
+  height: 22px;
+  stroke-width: 2.5;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.theme-button.active svg {
+  animation: iconSpin 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes iconSpin {
+  0% {
+    transform: rotate(0deg) scale(0.8);
+  }
+
+  50% {
+    transform: rotate(180deg) scale(1.2);
+  }
+
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
 }
 
 /* Responsive design */
 @media (max-width: 640px) {
   .theme-switcher {
-    gap: 4px;
-    padding: 4px;
+    gap: 8px;
+    padding: 8px;
   }
 
   .theme-button {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
   }
 
   .theme-button svg {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
   }
 }
