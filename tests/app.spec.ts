@@ -3,14 +3,16 @@ import { test, expect } from '@playwright/test';
 test.describe('Todo App - Core Functionality', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
-    await page.evaluate(async () => {
+    // Simplified cleanup - just clear storage
+    await page.evaluate(() => {
       localStorage.clear();
-      const databases = await window.indexedDB.databases();
-      databases.forEach(db => {
-        if (db.name) window.indexedDB.deleteDatabase(db.name);
-      });
+      sessionStorage.clear();
     });
-    await page.reload();
+    // Only reload if needed
+    const hasContent = await page.locator('.todo-list li').count();
+    if (hasContent > 0) {
+      await page.reload();
+    }
   });
 
   test('should load the app successfully', async ({ page }) => {
@@ -104,14 +106,10 @@ test.describe('Todo App - Core Functionality', () => {
 test.describe('Todo App - Advanced Options', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
-    await page.evaluate(async () => {
+    await page.evaluate(() => {
       localStorage.clear();
-      const databases = await window.indexedDB.databases();
-      databases.forEach(db => {
-        if (db.name) window.indexedDB.deleteDatabase(db.name);
-      });
+      sessionStorage.clear();
     });
-    await page.reload();
   });
 
   test('should toggle advanced options', async ({ page }) => {
@@ -241,14 +239,10 @@ test.describe('Todo App - Theme Switching', () => {
 test.describe('Todo App - Empty State', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
-    await page.evaluate(async () => {
+    await page.evaluate(() => {
       localStorage.clear();
-      const databases = await window.indexedDB.databases();
-      databases.forEach(db => {
-        if (db.name) window.indexedDB.deleteDatabase(db.name);
-      });
+      sessionStorage.clear();
     });
-    await page.reload();
   });
 
   test('should show empty state when no todos', async ({ page }) => {

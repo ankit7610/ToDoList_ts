@@ -3,14 +3,10 @@ import { test, expect } from '@playwright/test';
 test.describe('Todo App - Filters and Search', () => {
     test.beforeEach(async ({ page }) => {
         await page.goto('/');
-        await page.evaluate(async () => {
+        await page.evaluate(() => {
             localStorage.clear();
-            const databases = await window.indexedDB.databases();
-            databases.forEach(db => {
-                if (db.name) window.indexedDB.deleteDatabase(db.name);
-            });
+            sessionStorage.clear();
         });
-        await page.reload();
     });
 
     test('should display filter panel', async ({ page }) => {
@@ -182,14 +178,10 @@ test.describe('Todo App - Filters and Search', () => {
 test.describe('Todo App - Statistics', () => {
     test.beforeEach(async ({ page }) => {
         await page.goto('/');
-        await page.evaluate(async () => {
+        await page.evaluate(() => {
             localStorage.clear();
-            const databases = await window.indexedDB.databases();
-            databases.forEach(db => {
-                if (db.name) window.indexedDB.deleteDatabase(db.name);
-            });
+            sessionStorage.clear();
         });
-        await page.reload();
     });
 
     test('should display statistics dashboard', async ({ page }) => {
