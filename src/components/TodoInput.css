@@ -1,7 +1,13 @@
 .todo-input-form {
   display: flex;
+  flex-direction: column;
   gap: 16px;
   margin-bottom: 32px;
+}
+
+.input-main {
+  display: flex;
+  gap: 12px;
   align-items: stretch;
 }
 
@@ -39,6 +45,28 @@
   transform: translateY(-2px);
 }
 
+.advanced-toggle {
+  width: 48px;
+  height: auto;
+  padding: 0;
+  border: none;
+  background: var(--card);
+  color: var(--neon-cyan);
+  border-radius: 16px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 900;
+  box-shadow: var(--neu-shadow-sm);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.advanced-toggle:hover {
+  transform: scale(1.1);
+  box-shadow:
+    var(--neu-shadow-md),
+    0 0 20px rgba(0, 240, 255, 0.3);
+}
+
 .add-btn {
   padding: 20px 44px;
   font-size: 14px;
@@ -61,7 +89,6 @@
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Ripple effect on click */
 .add-btn::before {
   content: '';
   position: absolute;
@@ -80,7 +107,6 @@
   height: 300px;
 }
 
-/* Animated shine effect */
 .add-btn::after {
   content: '';
   position: absolute;
@@ -122,10 +148,104 @@
     0 0 20px rgba(0, 240, 255, 0.5);
 }
 
+.advanced-options {
+  background: var(--card);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: var(--neu-shadow-inset);
+  animation: slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+    max-height: 0;
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 500px;
+  }
+}
+
+.option-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.option-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.option-group label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.option-select,
+.option-input {
+  padding: 10px 14px;
+  font-size: 13px;
+  border: none;
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--text-dark);
+  font-weight: 500;
+  box-shadow: var(--neu-shadow-inset);
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.option-select:focus,
+.option-input:focus {
+  box-shadow:
+    var(--neu-shadow-inset),
+    inset 0 0 15px rgba(0, 240, 255, 0.1),
+    0 0 0 2px rgba(0, 240, 255, 0.3);
+}
+
+.notes-group {
+  margin-top: 8px;
+}
+
+.notes-input {
+  padding: 12px 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--text-dark);
+  font-weight: 500;
+  box-shadow: var(--neu-shadow-inset);
+  transition: all 0.3s ease;
+  outline: none;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.notes-input::placeholder {
+  color: var(--text-muted);
+}
+
+.notes-input:focus {
+  box-shadow:
+    var(--neu-shadow-inset),
+    inset 0 0 20px rgba(0, 240, 255, 0.1),
+    0 0 0 2px rgba(0, 240, 255, 0.3);
+}
+
 @media (max-width: 640px) {
-  .todo-input-form {
-    gap: 12px;
-    margin-bottom: 28px;
+  .input-main {
+    gap: 8px;
   }
 
   .todo-input {
@@ -133,8 +253,16 @@
     font-size: 15px;
   }
 
+  .advanced-toggle {
+    width: 42px;
+  }
+
   .add-btn {
     padding: 16px 28px;
     font-size: 12px;
+  }
+
+  .option-row {
+    grid-template-columns: 1fr;
   }
 }
