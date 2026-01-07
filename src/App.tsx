@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Todo } from './types';
+import { Todo, Priority } from './types';
 import TodoInput from './components/TodoInput';
 import TodoList from './components/TodoList';
 import ThemeSwitcher from './components/ThemeSwitcher';
@@ -41,12 +41,28 @@ const App: React.FC = () => {
     }
   }, [todos, isLoaded]);
 
-  const addTodo = (title: string): void => {
+  const addTodo = ({
+    title,
+    priority,
+    category,
+    notes,
+    dueDate
+  }: {
+    title: string;
+    priority?: Priority;
+    category?: string;
+    notes?: string;
+    dueDate?: Date;
+  }): void => {
     const newTodo: Todo = {
       id: Date.now().toString(),
       title,
       completed: false,
       createdAt: new Date(),
+      priority,
+      category,
+      notes,
+      dueDate,
     };
     setTodos([newTodo, ...todos]);
   };
